@@ -1,0 +1,32 @@
+name: Fetch Quote of the Day
+
+on:
+  schedule:
+    - cron: '15 7 * * *'   # 07:15 UTC daily — after Wikiquote updates
+  workflow_dispatch:        # allows manual run from the Actions tab
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write       # needed to commit feed.xml back to the repo
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Fetch QOTD and update feed
+        run: python fetch_qotd.py
+
+      - name: Commit and push feed.xml
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add feed.xml
+          git diff --cached --quiet || git commit -m "QOTD $(date -u +%Y-%m-%d)"
+          git push
