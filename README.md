@@ -40,9 +40,7 @@ Paste that into FreshRSS, Reeder, or any RSS reader.
 
 ## How it updates
 
-The feed refreshes automatically every day at **7:15 AM UTC** (check what that is in your local timezone — for US Central it's 2:15 AM). No action needed on your part once it's set up; it just runs.
-
-If a day's entry looks missing, check the **Actions** tab — green checkmark means it ran successfully. If it says "already in feed — nothing to do," that means it already has today's (UTC) quote and there's nothing wrong.
+The feed refreshes automatically every day. No action needed on your part once it's set up; it just runs.
 
 ---
 
